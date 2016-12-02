@@ -126,7 +126,7 @@ var PandaForce = function (_React$Component) {
     value: function generateDumpling() {
       this.dumplings.push(new Dumpling(this.refs.canvas, this.images.dumpling));
       if (this.playing) {
-        setTimeout(this.generateDumpling, Math.random() * 1000 * 10);
+        setTimeout(this.generateDumpling, Math.random() * 1000 * 3);
       }
     }
   }, {
