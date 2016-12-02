@@ -101,7 +101,9 @@ var PandaForce = function (_React$Component) {
   _createClass(PandaForce, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      if (this.refs.canvas) {
+      var canvas = document.querySelector("#panda-force-wrapper-id");
+
+      if (canvas) {
         this.draw();
       }
     }
@@ -124,7 +126,8 @@ var PandaForce = function (_React$Component) {
   }, {
     key: "generateDumpling",
     value: function generateDumpling() {
-      this.dumplings.push(new Dumpling(this.refs.canvas, this.images.dumpling));
+      var canvas = document.querySelector("#panda-force-wrapper-id");
+      this.dumplings.push(new Dumpling(canvas, this.images.dumpling));
       if (this.playing) {
         setTimeout(this.generateDumpling, Math.random() * 1000 * 3);
       }
@@ -142,7 +145,7 @@ var PandaForce = function (_React$Component) {
   }, {
     key: "drawPanda",
     value: function drawPanda(ctx) {
-      var canvas = this.refs.canvas;
+      var canvas = document.querySelector("#panda-force-wrapper-id");
 
       if (this.pandaPictureState < 4) {
         ctx.drawImage(this.images.panda, 0, canvas.height - this.images.panda.height - 6 + this.pandaOffset);
@@ -194,9 +197,11 @@ var PandaForce = function (_React$Component) {
   }, {
     key: "drawInfo",
     value: function drawInfo(ctx) {
+      var canvas = document.querySelector("#panda-force-wrapper-id");
+
       if (this.looser) {
         ctx.fillStyle = "rgba(225,225,225,0.75)";
-        ctx.fillRect(12, 12, this.refs.canvas.width - 24, this.refs.canvas.height - 24);
+        ctx.fillRect(12, 12, canvas.width - 24, canvas.height - 24);
 
         ctx.fillStyle = "#ff0000";
         ctx.font = "36px SwissquoteCT";
@@ -207,8 +212,8 @@ var PandaForce = function (_React$Component) {
         ctx.fillText("Your best score: " + (window.localStorage.PandaForceScore || this.score), 24, 12 + 12 + 48 + 3 * 24);
       } else {
         ctx.fillStyle = "rgba(225,225,225,0.75)";
-        ctx.fillRect(12, 12, this.refs.canvas.width - 24, 48);
-        ctx.fillRect(12, 12 + 12 + 48, this.refs.canvas.width - 24, 48);
+        ctx.fillRect(12, 12, canvas.width - 24, 48);
+        ctx.fillRect(12, 12 + 12 + 48, canvas.width - 24, 48);
 
         ctx.fillStyle = "#60ff60";
         ctx.font = "36px SwissquoteCT";
@@ -228,8 +233,7 @@ var PandaForce = function (_React$Component) {
   }, {
     key: "draw",
     value: function draw() {
-      var canvas = this.refs.canvas;
-
+      var canvas = document.querySelector("#panda-force-wrapper-id");
 
       var ctx = canvas.getContext("2d");
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -250,7 +254,7 @@ var PandaForce = function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react2.default.createElement("canvas", { style: { width: "100%" }, height: "192", ref: "canvas", onMouseDown: this.handleCanvasClick });
+      return _react2.default.createElement("canvas", { id: "panda-force-wrapper-id", style: { width: "100%" }, height: "192", onMouseDown: this.handleCanvasClick });
     }
   }]);
 

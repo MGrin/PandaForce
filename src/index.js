@@ -68,7 +68,9 @@ export default class PandaForce extends React.Component {
   }
 
   componentDidMount() {
-    if (this.refs.canvas) {
+    const canvas = document.querySelector("#panda-force-wrapper-id");
+
+    if (canvas) {
       this.draw();
     }
   }
@@ -89,7 +91,8 @@ export default class PandaForce extends React.Component {
   }
 
   generateDumpling() {
-    this.dumplings.push(new Dumpling(this.refs.canvas, this.images.dumpling));
+    const canvas = document.querySelector("#panda-force-wrapper-id");
+    this.dumplings.push(new Dumpling(canvas, this.images.dumpling));
     if (this.playing) {
       setTimeout(this.generateDumpling, Math.random() * 1000 * 3);
     }
@@ -105,7 +108,8 @@ export default class PandaForce extends React.Component {
   }
 
   drawPanda(ctx) {
-    const {canvas} = this.refs;
+    const canvas = document.querySelector("#panda-force-wrapper-id");
+
     if (this.pandaPictureState < 4) {
       ctx.drawImage(this.images.panda, 0, canvas.height - this.images.panda.height - 6 + this.pandaOffset);
     } else {
@@ -150,9 +154,11 @@ export default class PandaForce extends React.Component {
   }
 
   drawInfo(ctx) {
+    const canvas = document.querySelector("#panda-force-wrapper-id");
+
     if (this.looser) {
       ctx.fillStyle = "rgba(225,225,225,0.75)";
-      ctx.fillRect(12, 12, this.refs.canvas.width - 24, this.refs.canvas.height - 24);
+      ctx.fillRect(12, 12, canvas.width - 24, canvas.height - 24);
 
       ctx.fillStyle = "#ff0000";
       ctx.font = "36px SwissquoteCT";
@@ -163,8 +169,8 @@ export default class PandaForce extends React.Component {
       ctx.fillText(`Your best score: ${window.localStorage.PandaForceScore || this.score}`, 24, 12 + 12 + 48 + 3 * 24);
     } else {
       ctx.fillStyle = "rgba(225,225,225,0.75)";
-      ctx.fillRect(12, 12, this.refs.canvas.width - 24, 48);
-      ctx.fillRect(12, 12 + 12 + 48, this.refs.canvas.width - 24, 48);
+      ctx.fillRect(12, 12, canvas.width - 24, 48);
+      ctx.fillRect(12, 12 + 12 + 48, canvas.width - 24, 48);
 
       ctx.fillStyle = "#60ff60";
       ctx.font = "36px SwissquoteCT";
@@ -182,7 +188,7 @@ export default class PandaForce extends React.Component {
   }
 
   draw() {
-    const {canvas} = this.refs;
+    const canvas = document.querySelector("#panda-force-wrapper-id");
 
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -202,6 +208,6 @@ export default class PandaForce extends React.Component {
   }
 
   render() {
-    return <canvas style={{width: "100%"}} height="192" ref="canvas" onMouseDown={this.handleCanvasClick}/>;
+    return <canvas id="panda-force-wrapper-id" style={{width: "100%"}} height="192" onMouseDown={this.handleCanvasClick}/>;
   }
 }
