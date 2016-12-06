@@ -136,7 +136,7 @@ export default class PandaForce extends React.Component {
 
   drawDumplings(ctx) {
     this.dumplings = this.dumplings.map(d => {
-      if (-this.pandaOffset < this.images.dumpling.height && d.x > 0 && d.x < this.images.panda.width) {
+      if (-this.pandaOffset < this.images.dumpling.height && d.x > -this.images.dumpling.width + 12 && d.x < this.images.panda.width) {
         this.playing = false;
         this.looser = true;
         if (!window.localStorage.PandaForceScore || window.localStorage.PandaForceScore && window.localStorage.PandaForceScore < this.score) {
@@ -195,9 +195,9 @@ export default class PandaForce extends React.Component {
 
     this.drawBackground(ctx);
     this.drawPanda(ctx);
+    this.drawDumplings(ctx);
 
     if (this.playing) {
-      this.drawDumplings(ctx);
       this.drawScore(ctx);
 
       this.score += 1;

@@ -21675,7 +21675,7 @@
 	      var _this2 = this;
 
 	      this.dumplings = this.dumplings.map(function (d) {
-	        if (-_this2.pandaOffset < _this2.images.dumpling.height && d.x > 0 && d.x < _this2.images.panda.width) {
+	        if (-_this2.pandaOffset < _this2.images.dumpling.height && d.x > -_this2.images.dumpling.width + 12 && d.x < _this2.images.panda.width) {
 	          _this2.playing = false;
 	          _this2.looser = true;
 	          if (!window.localStorage.PandaForceScore || window.localStorage.PandaForceScore && window.localStorage.PandaForceScore < _this2.score) {
@@ -21739,9 +21739,9 @@
 
 	      this.drawBackground(ctx);
 	      this.drawPanda(ctx);
+	      this.drawDumplings(ctx);
 
 	      if (this.playing) {
-	        this.drawDumplings(ctx);
 	        this.drawScore(ctx);
 
 	        this.score += 1;
